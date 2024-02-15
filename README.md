@@ -21,11 +21,11 @@ Download the latest version of python through (https://www.python.org/downloads/
 6. FAQ:
 - The FAQ tab provides answers to common questions about using the application.
 # How The Calculator Works
--The calculator uses the Middleton High School and the Hillsborough County Public Schools GPA scale
--The scale goes as follows
--For Regular, A=4.0, B=3.0, C=2.0, D=1.0, F=0.0
--For Honors, A=4.5, B=3.5, C=2.5, D=1.0, F=0.0
--For AICE, AP, DE, A=5.0, B=4.0, C=3.0, D=1.0, F=0.0
--Using this scale the calulator takes your grade in the class and uses it to give you your accurate GPA
--Refer to the Hillsbrough County GPA Transition Website (https://www.hillsboroughschools.org/progressionplan)
--Note: This scale is used to calculate your unweighted GPA which contains all of the credits you recieve from your classes
+- The calculator uses the Middleton High School and the Hillsborough County Public Schools GPA scale
+- The scale goes as follows
+- For Regular, A=4.0, B=3.0, C=2.0, D=1.0, F=0.0
+- For Honors, A=4.5, B=3.5, C=2.5, D=1.0, F=0.0
+- For AICE, AP, DE, A=5.0, B=4.0, C=3.0, D=1.0, F=0.0
+- Using this scale the calulator takes your grade in the class and uses it to give you your accurate GPA
+- Refer to the Hillsbrough County GPA Transition Website (https://www.hillsboroughschools.org/progressionplan)
+- Note: This scale is used to calculate your unweighted GPA which contains all of the credits you recieve from your classes
