@@ -37,7 +37,7 @@ class CGPACalculatorApp:
 
     def create_widgets(self):
         self.notebook = ttk.Notebook(self.root)
-        self.notebook.pack(fill="both", expand=True)
+        self.notebook.pack(fill="both", expand=True, padx=100)  # Centering the tabs
 
         self.instructions_frame = ttk.Frame(self.notebook, style="Instructions.TFrame")
         self.notebook.add(self.instructions_frame, text="Instructions")
@@ -54,6 +54,8 @@ class CGPACalculatorApp:
         self.faq_frame = ttk.Frame(self.notebook, style="Instructions.TFrame")
         self.notebook.add(self.faq_frame, text="FAQ")
         self.create_faq_widgets()
+
+        self.notebook.enable_traversal()  # Allow keyboard traversal of tabs
 
     def create_instructions_widgets(self):
         instructions_text = """
@@ -120,7 +122,7 @@ class CGPACalculatorApp:
                 wraplength=800,
                 cursor="hand2",
             )
-            question_label.grid(row=0, column=0, sticky="w")
+            question_label.pack(anchor="w", fill="x")
             question_label.bind(
                 "<Button-1>",
                 lambda event, frame=question_frame, answer=answer: self.toggle_answer_visibility(
@@ -134,19 +136,15 @@ class CGPACalculatorApp:
             answer_label = tk.Label(
                 frame,
                 text=answer,
-                font=("Comic Sans MS", 12),
+                font=("Calibri", 12),
                 padx=10,
                 pady=10,
                 wraplength=800,
             )
-            answer_label.grid(row=1, column=0, sticky="w")
+            answer_label.pack(anchor="w", fill="x")
             frame.update_idletasks()  # Update the frame to ensure visibility
         else:
-            answer_label = children[1]
-            if answer_label.winfo_ismapped():
-                answer_label.grid_forget()  # Hide answer label
-            else:
-                answer_label.grid(row=1, column=0, sticky="w")  # Show answer label
+            children[-1].pack_forget()  # Hide answer label
 
     def create_unweighted_widgets(self):
         unweighted_box = ttk.Frame(self.unweighted_frame, style="Instructions.TFrame")
@@ -404,7 +402,7 @@ class CGPACalculatorApp:
             # Calculate the weighted GPA
             weighted_cgpa = total_grade_points / total_credit_units
             self.weighted_cgpa_label.config(
-                text=f"Your Weighted CGPA is: {weighted_cgpa:.2f}"
+                text=f"Your Weighted GPA is: {weighted_cgpa:.2f}"
             )
 
             # Populate the table with course details
