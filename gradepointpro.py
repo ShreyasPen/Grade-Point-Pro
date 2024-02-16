@@ -88,24 +88,24 @@ class CGPACalculatorApp:
     def create_faq_widgets(self):
         faq_data = [
             (
-                "How do I add a course?",
-                "You can add a course by clicking the '+ Add Course' button.",
+                "Can people from other schools use this?",
+                "The gpa calculator is free to use for anyone from any school. Our calculators use the Hillsborough County Public Schools GPA scale to calculate. Before using the GPA calculator we reccommend that users review their school’s or district’s GPA scale to make sure that the calculations match.",
             ),
             (
-                "Can I remove a course after adding it?",
-                "Yes, you can remove a course by clicking the '- Remove Course' button.",
+                "What Grading Scale does the GPA Calculator use?",
+                "The grading scale the the calculators use is from the Hillsborough County Public School’s given grading/GPAchart.",
             ),
             (
-                "How do I calculate my GPA?",
-                "You can calculate your GPA by clicking the 'Calculate GPA' button after adding your courses.",
+                "What is the difference between the Unweighted GPA and Weighted GPA?",
+                "When calculating your weighted GPA the calculator takes the credits you get for a class into you GPA, generally making it a higher number than the unweighted gpa. The unweighted GPA calculator only takes your class grade into account, in which you can get a maximum of 4.0 .",
             ),
             (
-                "Can I calculate both unweighted and weighted GPA?",
-                "Yes, this application supports both unweighted and weighted GPA calculations.",
+                "What is the purpose of the Course Type Menu",
+                "The Course Type Menu is used to determine which level of class that you’re taking. Based on the level of the class, a certain number of credits is added onto your  weighted GPA. For an regular class there is no extra credit, for an honors class an extra 0.04 of credits is added on to you unweighted GPA, while a AP, AICE, or Dual Enrollment class adds 0.08 credits.",
             ),
             (
-                "What do I do if I encounter an error?",
-                "If you encounter an error, please check your inputs and try again. If the issue persists, you can contact support for assistance.",
+                "Can you use this calculator to predict future semesters?",
+                "You are able to predict or get an estimate of your GPA for the future. To do this use the calculator normally and input what you think  you will get in a class to find out you GPA. You can also use this method to determine whether or not to take a specific class.",
             ),
         ]
 
@@ -116,7 +116,7 @@ class CGPACalculatorApp:
             question_label = tk.Label(
                 question_frame,
                 text=f"{idx + 1}. {question}",
-                font=("Comic Sans MS", 14, "bold"),
+                font=("Helvetica", 14, "bold"),
                 padx=10,
                 pady=10,
                 wraplength=800,
@@ -136,7 +136,7 @@ class CGPACalculatorApp:
             answer_label = tk.Label(
                 frame,
                 text=answer,
-                font=("Comic Sans MS", 12),
+                font=("Helvetica", 12),
                 padx=10,
                 pady=10,
                 wraplength=800,
