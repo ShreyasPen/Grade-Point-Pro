@@ -116,7 +116,7 @@ class CGPACalculatorApp:
             question_label = tk.Label(
                 question_frame,
                 text=f"{idx + 1}. {question}",
-                font=("Calibri", 14, "bold"),
+                font=("Comic Sans MS", 14, "bold"),
                 padx=10,
                 pady=10,
                 wraplength=800,
@@ -136,7 +136,7 @@ class CGPACalculatorApp:
             answer_label = tk.Label(
                 frame,
                 text=answer,
-                font=("Calibri", 12),
+                font=("Comic Sans MS", 12),
                 padx=10,
                 pady=10,
                 wraplength=800,
@@ -144,7 +144,11 @@ class CGPACalculatorApp:
             answer_label.pack(anchor="w", fill="x")
             frame.update_idletasks()  # Update the frame to ensure visibility
         else:
-            children[-1].pack_forget()  # Hide answer label
+            answer_label = children[1]
+            if answer_label.winfo_ismapped():
+                answer_label.pack_forget()  # Hide answer label
+            else:
+                answer_label.pack(anchor="w", fill="x")  # Show answer label
 
     def create_unweighted_widgets(self):
         unweighted_box = ttk.Frame(self.unweighted_frame, style="Instructions.TFrame")
