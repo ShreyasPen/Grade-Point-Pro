@@ -1,7 +1,7 @@
 # GradePoint Pro - GPA Calculator
 GradePoint Pro is a simple GPA calculator application built using the Tkinter library in Python. It allows users to calculate both unweighted and weighted GPAs based on their course grades and credit units.
 # Prerequisites
-Download the latest version of python through (https://www.python.org/downloads/) for Windows or MacOS depending on the system being used. You also need an IDE which you have to use VScode (https://code.visualstudio.com/) you can download for both Windows or MacOS based on the system being used.
+Download the latest version of python through (https://www.python.org/downloads/) for Windows or MacOS depending on the system being used. You also need an IDE (recommended VScode) to download that use (https://code.visualstudio.com/)
 # Features
 - Calculate both unweighted and weighted GPAs.
 - Add any amount of courses and remove them if needed
@@ -30,5 +30,4 @@ Download the latest version of python through (https://www.python.org/downloads/
 - Refer to the Hillsbrough County GPA Transition Website (https://www.hillsboroughschools.org/progressionplan)
 - Note: This scale is used to calculate your unweighted GPA which contains all of the credits you recieve from your classes
 # To Access the Database
-- In vscode in the left column (extensions) search for SQLite Viewer and download it.
-- Then open the files in the explorer, it should give you the option to "Open Anyway" which prompts to where the file should be opened then you can choose SQLite Viewer. That should bring you to the Database.
+
