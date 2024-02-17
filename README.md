@@ -29,3 +29,6 @@ Download the latest version of python through (https://www.python.org/downloads/
 - Using this scale the calulator takes your grade in the class and uses it to give you your accurate GPA
 - Refer to the Hillsbrough County GPA Transition Website (https://www.hillsboroughschools.org/progressionplan)
 - Note: This scale is used to calculate your unweighted GPA which contains all of the credits you recieve from your classes
+# To Access the Database
+- In vscode in the left column (extensions) search for SQLite Viewer and download it.
+- Then open the files in the explorer, it should give you the option to "Open Anyway" which prompts to where the file should be opened then you can choose SQLite Viewer. That should bring you to the Database.
