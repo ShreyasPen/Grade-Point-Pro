@@ -1,8 +1,7 @@
 # GradePoint Pro - GPA Calculator
 GradePoint Pro is a simple GPA calculator application built using the Tkinter library in Python. It allows users to calculate both unweighted and weighted GPAs based on their course grades and credit units.
 # Prerequisites
-Download the latest version of python through (https://www.python.org/downloads/) for Windows or MacOS depending on the system being used. You also need an IDE of your choice. (VSCode is recommended)
-- *If your using vscode to access the database Downlaod the extension SQLite Viewer.
+Download the latest version of python through (https://www.python.org/downloads/) for Windows or MacOS depending on the system being used. You also need an IDE which you have to use VScode (https://code.visualstudio.com/) you can download for both Windows or MacOS based on the system being used.
 # Features
 - Calculate both unweighted and weighted GPAs.
 - Add any amount of courses and remove them if needed
