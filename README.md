@@ -7,6 +7,7 @@ Download the latest version of python through (https://www.python.org/downloads/
 - Add any amount of courses and remove them if needed
 - Clear Instruction provided for easy use
 - FAQ section to address common questions
+- Ability to transfer your GPA chart to a Microsoft Word document 
 # Instructions
 1. Running the Application:
 - Open the Python file in your preferred IDE and run the program to launch the GPA calculator.
@@ -18,16 +19,18 @@ Download the latest version of python through (https://www.python.org/downloads/
 - Once all desired courses are added, click on the 'Calculate GPA' button. - The application will display your GPA based on the added courses.
 5. Switching Calculator Type:
 - Use the tabs to switch between unweighted and weighted GPA calculators.
-6. FAQ:
+6. Print Button:
+  -The print button will allow you to transfer your gpa chart into a word document, click print the save the document as you wish.
+7. FAQ:
 - The FAQ tab provides answers to common questions about using the application.
 # How The Calculator Works
 - The calculator uses the Middleton High School and the Hillsborough County Public Schools GPA scale
 - The scale goes as follows
-- For Regular, A=4.0, B=3.0, C=2.0, D=1.0, F=0.0
-- For Honors, A=4.5, B=3.5, C=2.5, D=1.0, F=0.0
-- For AICE, AP, DE, A=5.0, B=4.0, C=3.0, D=1.0, F=0.0
+- For Regular, there is not any added credits
+- For Honors, 0.04 is added per class
+- For AICE, AP, DE, 0.08 is added per class
 - Using this scale the calulator takes your grade in the class and uses it to give you your accurate GPA
-- Refer to the Hillsbrough County GPA Transition Website (https://www.hillsboroughschools.org/progressionplan)
-- Note: This scale is used to calculate your unweighted GPA which contains all of the credits you recieve from your classes
+- Note: This scale is used to calculate your weighted GPA which contains all of the credits you recieve from your classes
+- No credits are added on for your unweighted GPA
 # To Access the Database
 
