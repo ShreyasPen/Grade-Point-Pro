@@ -1,5 +1,8 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
+import tkinter.filedialog as filedialog
+import sqlite3
+from docx import Document
 
 
 class CGPACalculatorApp:
@@ -9,35 +12,79 @@ class CGPACalculatorApp:
         self.root.geometry("1400x900")
         self.create_widgets()
         self.style = ttk.Style()
-        self.style.theme_use("clam")  # Changed to a more modern theme
+        self.style.theme_use("clam")
         self.style.configure(
             "TButton",
             foreground="white",
-            background="#3498db",  # Changed to a modern blue color
+            background="#3498db",
             font=("Helvetica", 10, "bold"),
             padding=10,
         )
-        self.style.map(
-            "TButton", background=[("active", "#2980b9")]  # Adjusted active color
-        )
+        self.style.map("TButton", background=[("active", "#2980b9")])
         self.style.configure(
             "Title.TLabel",
-            foreground="#3498db",  # Adjusted blue color
+            foreground="#3498db",
             font=("Helvetica", 20, "bold"),
         )
 
         self.style.configure(
             "Instructions.TFrame",
-            background="#f0f0f0",  # Light gray background color
+            background="#f0f0f0",
             padding=10,
             borderwidth=2,
             relief="groove",
             font=("Helvetica", 14),
         )
 
+        # Connect to SQLite3 database
+        self.conn = sqlite3.connect("gradepointpro.db")
+        self.cursor = self.conn.cursor()
+        self.create_tables()
+
+    def create_tables(self):
+        """
+        Create the 'unweighted' and 'weighted' tables in the database if they don't exist.
+        """
+        self.cursor.execute(
+            """CREATE TABLE IF NOT EXISTS unweighted (
+                            id INTEGER PRIMARY KEY AUTOINCREMENT,
+                            course_name TEXT,
+                            credits REAL,
+                            grade TEXT)"""
+        )
+        self.cursor.execute(
+            """CREATE TABLE IF NOT EXISTS weighted (
+                            id INTEGER PRIMARY KEY AUTOINCREMENT,
+                            course_type TEXT,
+                            course_name TEXT,
+                            credits REAL,
+                            grade TEXT)"""
+        )
+        self.conn.commit()
+
+    def insert_unweighted_course(self, course_name, credits, grade):
+        """
+        Insert a new unweighted course entry into the 'unweighted' table.
+        """
+        self.cursor.execute(
+            "INSERT INTO unweighted (course_name, credits, grade) VALUES (?, ?, ?)",
+            (course_name, credits, grade),
+        )
+        self.conn.commit()
+
+    def insert_weighted_course(self, course_type, course_name, credits, grade):
+        """
+        Insert a new weighted course entry into the 'weighted' table.
+        """
+        self.cursor.execute(
+            "INSERT INTO weighted (course_type, course_name, credits, grade) VALUES (?, ?, ?, ?)",
+            (course_type, course_name, credits, grade),
+        )
+        self.conn.commit()
+
     def create_widgets(self):
         self.notebook = ttk.Notebook(self.root)
-        self.notebook.pack(fill="both", expand=True, padx=100)  # Centering the tabs
+        self.notebook.pack(fill="both", expand=True, padx=100)
 
         self.instructions_frame = ttk.Frame(self.notebook, style="Instructions.TFrame")
         self.notebook.add(self.instructions_frame, text="Instructions")
@@ -55,7 +102,7 @@ class CGPACalculatorApp:
         self.notebook.add(self.faq_frame, text="FAQ")
         self.create_faq_widgets()
 
-        self.notebook.enable_traversal()  # Allow keyboard traversal of tabs
+        self.notebook.enable_traversal()
 
     def create_instructions_widgets(self):
         instructions_text = """
@@ -142,13 +189,13 @@ class CGPACalculatorApp:
                 wraplength=800,
             )
             answer_label.pack(anchor="w", fill="x")
-            frame.update_idletasks()  # Update the frame to ensure visibility
+            frame.update_idletasks()
         else:
             answer_label = children[1]
             if answer_label.winfo_ismapped():
-                answer_label.pack_forget()  # Hide answer label
+                answer_label.pack_forget()
             else:
-                answer_label.pack(anchor="w", fill="x")  # Show answer label
+                answer_label.pack(anchor="w", fill="x")
 
     def create_unweighted_widgets(self):
         unweighted_box = ttk.Frame(self.unweighted_frame, style="Instructions.TFrame")
@@ -157,7 +204,7 @@ class CGPACalculatorApp:
         ttk.Label(
             unweighted_box,
             text="Unweighted GPA Calculator",
-            style="Title.TLabel",  # Adjusted heading style
+            style="Title.TLabel",
         ).pack(pady=10)
 
         unweighted_calculator_frame = ttk.Frame(unweighted_box)
@@ -186,26 +233,32 @@ class CGPACalculatorApp:
             self.unweighted_buttons_frame,
             text="+ Add Course",
             command=self.add_unweighted_course,
-            style="TButton",  # Adjusted button style
+            style="TButton",
         ).grid(row=0, column=0, padx=5)
         ttk.Button(
             self.unweighted_buttons_frame,
             text="- Remove Course",
             command=self.remove_unweighted_course,
-            style="TButton",  # Adjusted button style
+            style="TButton",
         ).grid(row=0, column=1, padx=5)
         ttk.Button(
             self.unweighted_buttons_frame,
             text="Calculate GPA",
             command=self.calculate_cgpa,
-            style="TButton",  # Adjusted button style
+            style="TButton",
         ).grid(row=0, column=2, padx=5)
+        ttk.Button(
+            self.unweighted_buttons_frame,
+            text="Print",
+            command=self.print_unweighted,
+            style="TButton",
+        ).grid(row=0, column=3, padx=5)
 
         self.cgpa_label = ttk.Label(
             unweighted_calculator_frame,
             text="Your Unweighted GPA is: ",
             font=("Helvetica", 14),
-            foreground="#3498db",  # Adjusted blue color
+            foreground="#3498db",
         )
         self.cgpa_label.grid(row=3, column=0, columnspan=3, pady=(10, 0))
 
@@ -221,13 +274,14 @@ class CGPACalculatorApp:
         self.unweighted_course_details_table.grid_remove()
 
     def create_weighted_widgets(self):
+
         weighted_box = ttk.Frame(self.weighted_frame, style="Instructions.TFrame")
         weighted_box.pack(padx=20, pady=20, fill="both", expand=True)
 
         ttk.Label(
             weighted_box,
             text="Weighted GPA Calculator",
-            style="Title.TLabel",  # Adjusted heading style
+            style="Title.TLabel",
         ).pack(pady=10)
 
         weighted_calculator_frame = ttk.Frame(weighted_box)
@@ -259,26 +313,32 @@ class CGPACalculatorApp:
             self.weighted_buttons_frame,
             text="+ Add Course",
             command=self.add_weighted_course,
-            style="TButton",  # Adjusted button style
+            style="TButton",
         ).grid(row=0, column=0, padx=5)
         ttk.Button(
             self.weighted_buttons_frame,
             text="- Remove Course",
             command=self.remove_weighted_course,
-            style="TButton",  # Adjusted button style
+            style="TButton",
         ).grid(row=0, column=1, padx=5)
         ttk.Button(
             self.weighted_buttons_frame,
             text="Calculate GPA",
             command=self.calculate_weighted_cgpa,
-            style="TButton",  # Adjusted button style
+            style="TButton",
         ).grid(row=0, column=2, padx=5)
+        ttk.Button(
+            self.weighted_buttons_frame,
+            text="Print",
+            command=self.print_weighted,
+            style="TButton",
+        ).grid(row=0, column=3, padx=5)
 
         self.weighted_cgpa_label = ttk.Label(
             weighted_calculator_frame,
             text="Your Weighted GPA is:",
             font=("Helvetica", 14),
-            foreground="#3498db",  # Adjusted blue color
+            foreground="#3498db",
         )
         self.weighted_cgpa_label.grid(row=3, column=0, columnspan=4, pady=(10, 0))
 
@@ -310,7 +370,7 @@ class CGPACalculatorApp:
 
     def remove_unweighted_course(self):
         children = self.unweighted_course_wrapper.winfo_children()
-        if len(children) > 1:  # Check if there is more than one course
+        if len(children) > 1:
             children[-1].destroy()
         else:
             messagebox.showwarning("Warning", "You must have at least one course.")
@@ -330,7 +390,7 @@ class CGPACalculatorApp:
 
     def remove_weighted_course(self):
         children = self.weighted_course_wrapper.winfo_children()
-        if len(children) > 1:  # Check if there is more than one course
+        if len(children) > 1:
             children[-1].destroy()
         else:
             messagebox.showwarning("Warning", "You must have at least one course.")
@@ -350,6 +410,9 @@ class CGPACalculatorApp:
                 grade_points = {"A": 4, "B": 3, "C": 2, "D": 1, "F": 0}
                 total_grade_points += grade_points[grade] * float(credit_units)
                 total_credit_units += float(credit_units)
+
+                # Insert course into database
+                self.insert_unweighted_course(course_code, credit_units, grade)
 
         if total_credit_units == 0:
             messagebox.showwarning(
@@ -375,38 +438,49 @@ class CGPACalculatorApp:
 
     def calculate_weighted_cgpa(self):
         children = self.weighted_course_wrapper.winfo_children()
-        total_grade_points = 0
+        total_unweighted_grade_points = 0
         total_credit_units = 0
+        ap_count = 0
+        honors_count = 0
 
         for child in children:
             entries = child.winfo_children()
             course_type = entries[0].get()
-            course_code = entries[1].get()
-            credit_units = entries[2].get()
+            course_name = entries[1].get()
+            credit_units = float(entries[2].get())
             grade = entries[3].get()
 
-            if course_code and credit_units and grade:
+            if course_name and credit_units and grade:
+                self.insert_weighted_course(
+                    course_type, course_name, credit_units, grade
+                )
+
                 grade_points = {"A": 4, "B": 3, "C": 2, "D": 1, "F": 0}
-                unweighted_grade_points = grade_points[grade] * float(credit_units)
+                unweighted_grade_points = grade_points[grade]
 
-                # Calculate the weighted GPA according to the specified rules
+                # Calculate the unweighted grade points
+                total_unweighted_grade_points += unweighted_grade_points * credit_units
+                total_credit_units += credit_units
+
+                # Count the number of AP, AICE, DE, and Honors classes
                 if course_type in ["AP", "AICE", "DE"] and grade in ["A", "B", "C"]:
-                    unweighted_grade_points += 0.08 * float(credit_units)
+                    ap_count += 1
                 elif course_type == "Honors" and grade in ["A", "B", "C"]:
-                    unweighted_grade_points += 0.04 * float(credit_units)
-
-                total_grade_points += unweighted_grade_points
-                total_credit_units += float(credit_units)
+                    honors_count += 1
 
         if total_credit_units == 0:
             messagebox.showwarning(
                 "Warning", "Please add at least one course with credit units."
             )
         else:
-            # Calculate the weighted GPA
-            weighted_cgpa = total_grade_points / total_credit_units
+            # Calculate the unweighted GPA
+            unweighted_gpa = total_unweighted_grade_points / total_credit_units
+
+            # Add additional points for AP, AICE, DE, and Honors classes
+            weighted_gpa = unweighted_gpa + 0.08 * ap_count + 0.04 * honors_count
+
             self.weighted_cgpa_label.config(
-                text=f"Your Weighted GPA is: {weighted_cgpa:.2f}"
+                text=f"Your Weighted GPA is: {weighted_gpa:.2f}"
             )
 
             # Populate the table with course details
@@ -426,6 +500,61 @@ class CGPACalculatorApp:
                     values=(course_name, credit_units, grade),
                 )
             self.weighted_course_details_table.grid()
+
+    def print_unweighted(self):
+        filename = filedialog.asksaveasfilename(
+            defaultextension=".docx",
+            filetypes=[("Word Document", "*.docx"), ("All Files", "*.*")],
+            title="Save Unweighted GPA Details",
+        )
+        if filename:
+            document = Document()
+            document.add_heading("Unweighted GPA Details", level=1)
+
+            for child in self.unweighted_course_wrapper.winfo_children():
+                course_name, credits, grade = [
+                    widget.get() for widget in child.winfo_children()
+                ]
+                document.add_paragraph(f"Course Name: {course_name}")
+                document.add_paragraph(f"Credits: {credits}")
+                document.add_paragraph(f"Grade: {grade}")
+                document.add_paragraph("----------------------------------")
+
+            document.add_paragraph(self.cgpa_label["text"])
+
+            document.save(filename)
+            messagebox.showinfo(
+                "File Saved",
+                f"Unweighted GPA details saved successfully at {filename}.",
+            )
+
+    def print_weighted(self):
+        filename = filedialog.asksaveasfilename(
+            defaultextension=".docx",
+            filetypes=[("Word Document", "*.docx"), ("All Files", "*.*")],
+            title="Save Weighted GPA Details",
+        )
+        if filename:
+            document = Document()
+            document.add_heading("Weighted GPA Details", level=1)
+
+            for child in self.weighted_course_wrapper.winfo_children():
+                course_type, course_name, credits, grade = [
+                    widget.get() for widget in child.winfo_children()
+                ]
+                document.add_paragraph(f"Course Type: {course_type}")
+                document.add_paragraph(f"Course Name: {course_name}")
+                document.add_paragraph(f"Credits: {credits}")
+                document.add_paragraph(f"Grade: {grade}")
+                document.add_paragraph("----------------------------------")
+
+            document.add_paragraph(self.weighted_cgpa_label["text"])
+
+            document.save(filename)
+            messagebox.showinfo(
+                "File Saved",
+                f"Weighted GPA details saved successfully at {filename}.",
+            )
 
 
 root = tk.Tk()
