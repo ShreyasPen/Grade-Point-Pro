@@ -25,7 +25,7 @@ GradePoint Pro is a simple GPA calculator application built using the Tkinter li
 7. FAQ:
 - The FAQ tab provides answers to common questions about using the application.
 8. Opening the database:
-- To open the database, if you are using vscode we reccomend downloading the extension sqlite-viewer, if not we reccomend using DB Browser (https://sqlitebrowser.org/dl/), or you can use any toher alternative to open a sqlite3 database.
+- To open the database, if you are using vscode we reccomend downloading the extension sqlite-viewer, if not we reccomend using DB Browser (https://sqlitebrowser.org/dl/), or you can use any other alternative to open a sqlite3 database.
 # How The Calculator Works
 The unweighted GPA is calculated by summing up the total grade points 
 earned in all courses and dividing it by the total number of credit units. 
