@@ -35,5 +35,4 @@ GradePoint Pro is a simple GPA calculator application built using the Tkinter li
 - Using this scale the calulator takes your grade in the class and uses it to give you your accurate GPA
 - Note: This scale is used to calculate your weighted GPA which contains all of the credits you recieve from your classes
 - No credits are added on for your unweighted GPA
-# To Access the Database
 
