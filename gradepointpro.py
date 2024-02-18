@@ -121,6 +121,12 @@ class CGPACalculatorApp:
         3. Click on the '+' button to add the course. You can remove a course by clicking the '-' button.
         4. Repeat step 2 until you have all your desired courses added.
         5. Click on 'Calculate GPA' to view your GPA based on the added courses. You can also add any class that you plan to take in the future.
+        6. Print Button: -The print button will allow you to transfer your gpa chart into a word document, click print the save the document as you wish.
+
+
+
+            FAQ:
+            The FAQ tab provides answers to common questions about using the application.
         """
         # Styling
         instructions_label = tk.Label(
