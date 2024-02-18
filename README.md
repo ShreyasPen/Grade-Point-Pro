@@ -27,12 +27,10 @@ GradePoint Pro is a simple GPA calculator application built using the Tkinter li
 8. Opening the database:
 - To open the database, if you are using vscode we reccomend downloading the extension sqlite-viewer, if not we reccomend using DB Browser (https://sqlitebrowser.org/dl/), or you can use any toher alternative to open a sqlite3 database.
 # How The Calculator Works
-- The calculator uses the Middleton High School and the Hillsborough County Public Schools GPA scale
-- The scale goes as follows
-- For Regular, there is not any added credits
-- For Honors, 0.04 is added per class
-- For AICE, AP, DE, 0.08 is added per class
-- Using this scale the calulator takes your grade in the class and uses it to give you your accurate GPA
-- Note: This scale is used to calculate your weighted GPA which contains all of the credits you recieve from your classes
-- No credits are added on for your unweighted GPA
+The unweighted GPA is calculated by summing up the total grade points 
+earned in all courses and dividing it by the total number of credit units. 
+Each course grade is converted to a numerical value (A=4, B=3, C=2, D=1, F=0) 
+and multiplied by the number of credits for the course. The resulting 
+grade points for all courses are then added together and divided by the 
+total number of credits to obtain the unweighted GPA.
 
