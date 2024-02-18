@@ -8,7 +8,8 @@ GradePoint Pro is a simple GPA calculator application built using the Tkinter li
 - Add any amount of courses and remove them if needed
 - Clear Instruction provided for easy use
 - FAQ section to address common questions
-- Ability to transfer your GPA chart to a Microsoft Word document 
+- Ability to transfer your GPA chart to a Microsoft Word document
+- Stores your classes and all of the information in a database
 # Instructions
 1. Running the Application:
 - Open the Python file in your preferred IDE and run the program to launch the GPA calculator.
