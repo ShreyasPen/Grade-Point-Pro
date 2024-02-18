@@ -34,3 +34,13 @@ and multiplied by the number of credits for the course. The resulting
 grade points for all courses are then added together and divided by the 
 total number of credits to obtain the unweighted GPA.
 
+
+The weighted GPA is calculated similarly to the unweighted GPA, with 
+additional weight given to certain courses. In addition to summing up 
+the total grade points earned in all courses and dividing it by the 
+total number of credit units, extra points are added for honors, AP, 
+AICE, or Dual Enrollment courses. Honors courses receive an additional 
+0.04 points, while AP, AICE, or Dual Enrollment courses receive an 
+additional 0.08 points. These additional points are added to the 
+unweighted GPA to obtain the weighted GPA.
+
