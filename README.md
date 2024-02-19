@@ -21,8 +21,8 @@ GradePoint Pro is a simple GPA calculator application built using the Tkinter li
 - Once all desired courses are added, click on the 'Calculate GPA' button. - The application will display your GPA based on the added courses.
 5. Switching Calculator Type:
 - Use the tabs to switch between unweighted and weighted GPA calculators.
-6. Print Button:
- -The print button will allow you to transfer your gpa chart into a word document, click print the save the document as you wish.
+6. Print Button
+-To transfer your GPA chart into a Word Document, click print and then save the word document as you wish.
 7. FAQ:
 - The FAQ tab provides answers to common questions about using the application.
 8. Opening the database:
